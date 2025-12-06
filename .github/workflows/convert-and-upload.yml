@@ -18,7 +18,7 @@ jobs:
 
       - name: Clone model repo
         run: |
-          git clone https://huggingface.co/CWClabs/CWC-Mistral-Nemo-12B-V2-q4_k_m 
+          git clone https://huggingface.co/CWClabs/CWC-Mistral-Nemo-12B-V2-q4_k_m  
           ls -lh CWC-Mistral-Nemo-12B-V2-q4_k_m
 
       - name: Set up Python
@@ -29,12 +29,16 @@ jobs:
       - name: Build llama.cpp
         run: |
           sudo apt-get install -y build-essential cmake
-          git clone https://github.com/ggerganov/llama.cpp 
+          git clone https://github.com/ggerganov/llama.cpp  
           cd llama.cpp
-          cmake -B build -DLLAMA_NATIVE=OFF -DCMAKE_BUILD_TYPE=Release
+          cmake -B build -DLLAMA_NATIVE=OFF -DLLAMA_CURL=OFF -DCMAKE_BUILD_TYPE=Release
           cmake --build build -j$(nproc) --target llama-quantize
           echo "$PWD/build/bin" >> $GITHUB_PATH
- 
+
+      - name: Install converter deps
+        run: |
+          pip install -r llama.cpp/requirements.txt
+
       - name: Convert to FP16 GGUF
         run: |
           cd llama.cpp
@@ -44,6 +48,9 @@ jobs:
         run: |
           llama-quantize model.f16.gguf model.q4_K_M.gguf q4_K_M
 
+      - name: Install Hugging Face CLI
+        run: pip install huggingface_hub
+
       - name: Upload GGUF to Hugging Face
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -51,4 +58,4 @@ jobs:
           huggingface-cli upload Berigny/cwc-mistral-nemo-12b-v2-q4_k_m-gguf \
             model.q4_K_M.gguf \
             model.q4_K_M.gguf \
-            --token $HF_TOKEN
+            --token "$HF_TOKEN"
