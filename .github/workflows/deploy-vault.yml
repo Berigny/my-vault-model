@@ -14,16 +14,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Fly CLI
-        uses: superfly/flyctl-actions/setup-flyctl@master
+        run: |
+          curl -L https://fly.io/install.sh | sh
+          echo "$HOME/.fly/bin" >> $GITHUB_PATH
 
       - name: Launch & create volume (first time only)
         run: |
           # idempotent: ignore if app already exists
-          fly launch --name "$FLY_APP_NAME" --region syd --no-deploy || true
+          $HOME/.fly/bin/fly launch --name "$FLY_APP_NAME" --region syd --no-deploy || true
           # idempotent: ignore if volume already exists
-          fly volumes create model_data -s 10 -a "$FLY_APP_NAME" -r syd || true
+          $HOME/.fly/bin/fly volumes create model_data -s 10 -a "$FLY_APP_NAME" -r syd || true
 
       - name: Deploy Vault
-        run: fly deploy --app "$FLY_APP_NAME"
+        run: $HOME/.fly/bin/fly deploy --app "$FLY_APP_NAME"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
