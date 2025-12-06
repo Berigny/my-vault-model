@@ -1,0 +1,29 @@
+name: Deploy Sovereign Vault
+
+on:
+  workflow_dispatch:  # manual trigger only
+
+env:
+  FLY_APP_NAME: ${{ secrets.FLY_APP_NAME }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Fly CLI
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Launch & create volume (first time only)
+        run: |
+          # idempotent: ignore if app already exists
+          fly launch --name "$FLY_APP_NAME" --region syd --no-deploy || true
+          # idempotent: ignore if volume already exists
+          fly volumes create model_data -s 10 -a "$FLY_APP_NAME" -r syd || true
+
+      - name: Deploy Vault
+        run: fly deploy --app "$FLY_APP_NAME"
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
