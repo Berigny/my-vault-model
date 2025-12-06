@@ -1,15 +1,16 @@
+# Use the official lightweight server image from llama.cpp
 FROM ghcr.io/ggml-org/llama.cpp:server
 
-# Install curl to download the model
+# Install curl (needed to download the model to the volume)
 USER root
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
-# Create the folder for the volume
+# Create a directory for the persistent volume
 RUN mkdir -p /models
 
-# Copy the startup script
+# Copy our startup script
 COPY run.sh /app/run.sh
 RUN chmod +x /app/run.sh
 
-# Run the script on boot
+# When the app starts, run our script
 ENTRYPOINT ["/app/run.sh"]
