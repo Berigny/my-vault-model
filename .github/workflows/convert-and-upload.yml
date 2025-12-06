@@ -34,7 +34,7 @@ jobs:
           cmake -B build -DLLAMA_NATIVE=OFF -DCMAKE_BUILD_TYPE=Release
           cmake --build build -j$(nproc) --target llama-quantize
           echo "$PWD/build/bin" >> $GITHUB_PATH
-
+ 
       - name: Convert to FP16 GGUF
         run: |
           cd llama.cpp
@@ -43,9 +43,6 @@ jobs:
       - name: Quantize to Q4_K_M
         run: |
           llama-quantize model.f16.gguf model.q4_K_M.gguf q4_K_M
-
-      - name: Install Hugging Face CLI
-        run: pip install huggingface_hub
 
       - name: Upload GGUF to Hugging Face
         env:
