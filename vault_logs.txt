@@ -1,0 +1,132 @@
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]init: using 6 threads for HTTP server
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]start: binding port with default address family
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]main: loading model
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]srv    load_model: loading model '/models/model.gguf'
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: loaded meta data with 34 key-value pairs and 363 tensors from /models/model.gguf (version GGUF V3 (latest))
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv   0:                       general.architecture str              = llama
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv   1:                               general.type str              = model
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv   2:                               general.name str              = Checkpoint 1212
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv   3:                            general.version str              = 1212
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv   4:                           general.basename str              = checkpoint
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv   5:                         general.size_label str              = 12B
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv   6:                          llama.block_count u32              = 40
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv   7:                       llama.context_length u32              = 131072
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv   8:                     llama.embedding_length u32              = 5120
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv   9:                  llama.feed_forward_length u32              = 14336
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  10:                 llama.attention.head_count u32              = 32
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  11:              llama.attention.head_count_kv u32              = 8
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  12:                       llama.rope.freq_base f32              = 1000000.000000
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  13:     llama.attention.layer_norm_rms_epsilon f32              = 0.000010
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  14:                 llama.attention.key_length u32              = 128
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  15:               llama.attention.value_length u32              = 128
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  16:                           llama.vocab_size u32              = 131072
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  17:                 llama.rope.dimension_count u32              = 128
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  18:                       tokenizer.ggml.model str              = gpt2
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  19:                         tokenizer.ggml.pre str              = tekken
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  20:                      tokenizer.ggml.tokens arr[str,131072]  = ["<unk>", "<s>", "</s>", "[INST]", "[...
+[2m2025-12-06T11:23:04Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  21:                  tokenizer.ggml.token_type arr[i32,131072]  = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, ...
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  22:                      tokenizer.ggml.merges arr[str,269443]  = ["Ġ Ġ", "Ġ t", "e r", "i n", "Ġ �...
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  23:                tokenizer.ggml.bos_token_id u32              = 1
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  24:                tokenizer.ggml.eos_token_id u32              = 2
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  25:            tokenizer.ggml.unknown_token_id u32              = 0
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  26:            tokenizer.ggml.padding_token_id u32              = 2
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  27:               tokenizer.ggml.add_bos_token bool             = true
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  28:               tokenizer.ggml.add_sep_token bool             = false
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  29:               tokenizer.ggml.add_eos_token bool             = false
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  30:                    tokenizer.chat_template str              = {%- if messages[0]["role"] == "system...
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  31:            tokenizer.ggml.add_space_prefix bool             = false
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  32:               general.quantization_version u32              = 2
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - kv  33:                          general.file_type u32              = 15
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - type  f32:   81 tensors
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - type q4_K:  241 tensors
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_model_loader: - type q6_K:   41 tensors
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: file format = GGUF V3 (latest)
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: file type   = Q4_K - Medium
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: file size   = 6.96 GiB (4.88 BPW)
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]load: special_eos_id is not in special_eog_ids - the tokenizer config may be incorrect
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]load: printing all EOG tokens:
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]load:   - 2 ('</s>')
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]load: special tokens cache size = 1000
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]load: token to piece cache size = 0.8498 MB
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: arch             = llama
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: vocab_only       = 0
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_ctx_train      = 131072
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_embd           = 5120
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_embd_inp       = 5120
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_layer          = 40
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_head           = 32
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_head_kv        = 8
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_rot            = 128
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_swa            = 0
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: is_swa_any       = 0
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_embd_head_k    = 128
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_embd_head_v    = 128
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_gqa            = 4
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_embd_k_gqa     = 1024
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_embd_v_gqa     = 1024
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: f_norm_eps       = 0.0e+00
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: f_norm_rms_eps   = 1.0e-05
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: f_clamp_kqv      = 0.0e+00
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: f_max_alibi_bias = 0.0e+00
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: f_logit_scale    = 0.0e+00
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: f_attn_scale     = 0.0e+00
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_ff             = 14336
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_expert         = 0
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_expert_used    = 0
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_expert_groups  = 0
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_group_used     = 0
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: causal attn      = 1
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: pooling type     = 0
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: rope type        = 0
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: rope scaling     = linear
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: freq_base_train  = 1000000.0
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: freq_scale_train = 1
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_ctx_orig_yarn  = 131072
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: rope_finetuned   = unknown
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: model type       = 13B
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: model params     = 12.25 B
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: general.name     = Checkpoint 1212
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: vocab type       = BPE
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_vocab          = 131072
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: n_merges         = 269443
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: BOS token        = 1 '<s>'
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: EOS token        = 2 '</s>'
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: UNK token        = 0 '<unk>'
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: PAD token        = 2 '</s>'
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: LF token         = 1010 'Ċ'
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: EOG token        = 2 '</s>'
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]print_info: max token length = 150
+[2m2025-12-06T11:23:05Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]load_tensors: loading model tensors, this can take a while... (mmap = true)
+[2m2025-12-06T11:25:09Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]srv  log_server_r: request: POST /v1/chat/completions 172.16.11.82 503
+[2m2025-12-06T11:26:46Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]load_tensors:   CPU_Mapped model buffer size =  7083.93 MiB
+[2m2025-12-06T11:26:46Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]load_tensors:   CPU_REPACK model buffer size =  5006.25 MiB
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]..........................................................................................
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: constructing llama_context
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: n_seq_max     = 4
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: n_ctx         = 8192
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: n_ctx_seq     = 8192
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: n_batch       = 2048
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: n_ubatch      = 512
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: causal_attn   = 1
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: flash_attn    = auto
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: kv_unified    = true
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: freq_base     = 1000000.0
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: freq_scale    = 1
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: n_ctx_seq (8192) < n_ctx_train (131072) -- the full capacity of the model will not be utilized
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context:        CPU  output buffer size =     2.00 MiB
+[2m2025-12-06T11:28:27Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_kv_cache:        CPU KV buffer size =  1280.00 MiB
+[2m2025-12-06T11:28:32Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_kv_cache: size = 1280.00 MiB (  8192 cells,  40 layers,  4/1 seqs), K (f16):  640.00 MiB, V (f16):  640.00 MiB
+[2m2025-12-06T11:28:33Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: Flash Attention was auto, set to enabled
+[2m2025-12-06T11:28:33Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context:        CPU compute buffer size =   266.00 MiB
+[2m2025-12-06T11:28:33Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: graph nodes  = 1247
+[2m2025-12-06T11:28:33Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]llama_context: graph splits = 1
+[2m2025-12-06T11:28:33Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]common_init_from_params: added </s> logit bias = -inf
+[2m2025-12-06T11:28:33Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]common_init_from_params: setting dry_penalty_last_n to ctx_size = 8192
+[2m2025-12-06T11:28:33Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m]common_init_from_params: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+[2m2025-12-06T11:28:50Z[0m proxy[7811eddb273798] [32msyd[0m [[34minfo[0m]App my-vault-model has excess capacity, autostopping machine 7811eddb273798. 0 out of 1 machines left running (region=syd, process group=app)
+[2m2025-12-06T11:28:50Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m][32m INFO[0m Sending signal SIGINT to main child process w/ PID 681
+[2m2025-12-06T11:28:54Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m][32m INFO[0m Main child exited with signal (with signal 'SIGINT', core dumped? false)
+[2m2025-12-06T11:28:54Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m][32m INFO[0m Starting clean up.
+[2m2025-12-06T11:28:54Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m][32m INFO[0m Umounting /dev/vdc from /models
+[2m2025-12-06T11:28:55Z[0m app[7811eddb273798] [32msyd[0m [[34minfo[0m][  351.340462] reboot: Restarting system

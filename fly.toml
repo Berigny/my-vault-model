@@ -1,21 +1,25 @@
-app = "my-vault-model" # Change to a unique name
-primary_region = "syd" # Match your main app's region
+# fly.toml app configuration file generated for my-vault-model on 2025-12-06T18:56:29+11:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'my-vault-model'
+primary_region = 'syd'
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
+
+[[mounts]]
+  source = 'model_data'
+  destination = '/models'
+  initial_size = '10gb'
 
 [http_service]
   internal_port = 8080
-  force_https = false
-  auto_stop_machines = true   # Sleep when not used
-  auto_start_machines = true  # Wake on request
-  min_machines_running = 0    # Scale to zero ($0 cost when idle)
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
 
-[[mounts]]
-  source = "model_data"
-  destination = "/models"
-  initial_size = "10gb"
-
-[vm]
-  size = "shared-cpu-4x"
-  memory = "8gb" # 12B Q4 model fits in ~7.5GB, so 8GB is tight but works
+[[vm]]
+  size = 'shared-cpu-4x'
+  memory = '8gb'

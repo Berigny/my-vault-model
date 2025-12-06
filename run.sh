@@ -3,7 +3,7 @@ set -e
 
 # Configuration
 # The direct download link for your specific GGUF file
-MODEL_URL="https://huggingface.co/CWClabs/CWC-Mistral-Nemo-12B-V2-q4_k_m/resolve/main/CWC-Mistral-Nemo-12B-v2-GGUF-q4_k_m-health-nutrition-natural-medicine.gguf?download=true"
+MODEL_URL="https://huggingface.co/CWClabs/CWC-Mistral-Nemo-12B-V2-q4_k_m/resolve/main/CWC-Mistral-Nemo-12B-v2-GGUF-q4_k_m-health-nutrition-natural-medicine.gguf"
 MODEL_PATH="/models/model.gguf"
 
 # 1. Download Check (Only happens on first deploy)
