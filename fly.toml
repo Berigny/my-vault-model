@@ -9,20 +9,17 @@ primary_region = 'syd'
 [build]
   dockerfile = 'Dockerfile'
 
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false   # <-- global off
+  auto_start_machines = true
+  min_machines_running = 1     # <-- keep 1 alive
+
 [[mounts]]
   source = 'model_data'
   destination = '/models'
   initial_size = '10gb'
-
-[[services]]
-  internal_port = 8080
-  protocol = "tcp"
-  auto_stop_machines = false
-  auto_start_machines = true
-  min_machines_running = 0
-  [[services.ports]]
-  port = 443
-  handlers = ["tls", "http"]   # tls first, then http
 
 [[vm]]
   size = 'shared-cpu-4x'
