@@ -1,6 +1,6 @@
+import os
 import streamlit as st
 import requests
-import json
 
 st.set_page_config(page_title="Sovereign Vault Chat", layout="centered")
 st.title("💬 Sovereign Vault Chat")
@@ -21,9 +21,13 @@ if prompt:
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # call vault (Fly proxy must be running on localhost:8080)
+    # ---- authenticated call to vault ----
+    VAULT_KEY = os.getenv("VAULT_KEY", "sovereign-123456")   # same secret you set in Fly
     url = "https://my-vault-model.fly.dev/v1/chat/completions"
-    headers = {"Content-Type": "application/json"}
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {VAULT_KEY}"
+    }
     payload = {
         "messages": st.session_state.messages,
         "temperature": 0.7,
@@ -33,7 +37,7 @@ if prompt:
     with st.chat_message("assistant"):
         placeholder = st.empty()
         try:
-            resp = requests.post(url, headers=headers, json=payload, stream=False, timeout=30)
+            resp = requests.post(url, headers=headers, json=payload, timeout=30)
             resp.raise_for_status()
             reply = resp.json()["choices"][0]["message"]["content"]
             placeholder.markdown(reply)

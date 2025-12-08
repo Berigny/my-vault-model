@@ -24,4 +24,5 @@ exec /app/llama-server \
     --host 0.0.0.0 \
     --port 8080 \
     --ctx-size 8192 \
-    --n-gpu-layers 0
+    --n-gpu-layers 0 \
+    --api-key "$VAULT_KEY"      # <-- new
