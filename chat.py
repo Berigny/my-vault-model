@@ -67,4 +67,10 @@ if prompt:
             body = resp.text if resp is not None else "No response body"
             placeholder.error(f"HTTP Error: {http_err} - Response: {body}")
         except Exception as e:
+            # Error handling
             placeholder.error(f"Vault error: {e}")
+            
+            # CRITICAL FIX: Remove the user's last message if the request failed
+            # This prevents the "User -> User" history corruption
+            if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
+                st.session_state.messages.pop()
