@@ -22,7 +22,7 @@ if prompt:
         st.markdown(prompt)
 
     # call vault (Fly proxy must be running on localhost:8080)
-    url = "http://localhost:8080/v1/chat/completions"
+    url = "https://my-vault-model.fly.dev/v1/chat/completions"
     headers = {"Content-Type": "application/json"}
     payload = {
         "messages": st.session_state.messages,
