@@ -5,7 +5,7 @@ import os
 
 # --- CONFIGURATION ---
 # This matches the model you set in your backend
-MODEL_ID = "groq/llama-3.1-8b-instant"
+MODEL_ID = "meta-llama/llama-3.1-8b-instruct"
 
 st.set_page_config(page_title="Vault Latency Test", layout="centered")
 st.title("⚡ Groq Speed Verification")
