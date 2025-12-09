@@ -1,14 +1,14 @@
 import streamlit as st
+import time
 from openai import OpenAI
 import os
 
 # --- CONFIGURATION ---
-# We are testing the "Instant" 8B model. 
-# If you want to test the 70B model, change this to: "groq/llama-3.1-70b-versatile"
+# This matches the model you set in your backend
 MODEL_ID = "groq/llama-3.1-8b-instant"
 
-st.set_page_config(page_title="Vault Verification (Groq)", layout="centered")
-st.title(f"⚡ Verification: {MODEL_ID}")
+st.set_page_config(page_title="Vault Latency Test", layout="centered")
+st.title("⚡ Groq Speed Verification")
 
 # 1. Fetch API Key (Prioritize Secrets)
 if "OPENROUTER_API_KEY" in st.secrets:
@@ -17,7 +17,7 @@ else:
     api_key = os.getenv("OPENROUTER_API_KEY")
 
 if not api_key:
-    st.error("❌ Missing OpenRouter API Key in Secrets!")
+    st.error("❌ Critical Error: `OPENROUTER_API_KEY` not found in Streamlit Secrets.")
     st.stop()
 
 # 2. Initialize Client (Direct to OpenRouter)
@@ -36,7 +36,7 @@ for msg in st.session_state.messages:
         st.markdown(msg["content"])
 
 # 4. Input & Response
-prompt = st.chat_input("Test the model latency...")
+prompt = st.chat_input("Test the model latency (e.g. 'Explain quantum entropy')")
 if prompt:
     # User Message
     st.chat_message("user").markdown(prompt)
@@ -46,14 +46,16 @@ if prompt:
     with st.chat_message("assistant"):
         placeholder = st.empty()
         full_response = ""
+        start_time = time.time()
         
         try:
+            # We use stream=True to visually see the speed
             stream = client.chat.completions.create(
                 model=MODEL_ID,
                 messages=st.session_state.messages,
                 stream=True,
                 extra_headers={
-                    "HTTP-Referer": "https://my-vault-model.fly.dev", # Optional: Your site
+                    "HTTP-Referer": "https://my-vault-model.fly.dev",
                     "X-Title": "Vault Verification",
                 }
             )
@@ -64,7 +66,15 @@ if prompt:
                     full_response += content
                     placeholder.markdown(full_response + "▌")
             
+            # Calculate final stats
+            end_time = time.time()
+            latency = end_time - start_time
+            chars = len(full_response)
+            
+            # Display result with stats
             placeholder.markdown(full_response)
+            st.caption(f"⏱️ **Latency:** {latency:.2f}s | **Speed:** {int(chars/latency) if latency > 0 else 0} chars/sec")
+            
             st.session_state.messages.append({"role": "assistant", "content": full_response})
             
         except Exception as e:
