@@ -1,76 +1,71 @@
 import streamlit as st
-import requests
+from openai import OpenAI
 import os
 
-st.set_page_config(page_title="Sovereign Vault Chat", layout="centered")
-st.title("💬 Sovereign Vault Chat")
+# --- CONFIGURATION ---
+# We are testing the "Instant" 8B model. 
+# If you want to test the 70B model, change this to: "groq/llama-3.1-70b-versatile"
+MODEL_ID = "groq/llama-3.1-8b-instant"
 
-# Initialize chat history
+st.set_page_config(page_title="Vault Verification (Groq)", layout="centered")
+st.title(f"⚡ Verification: {MODEL_ID}")
+
+# 1. Fetch API Key (Prioritize Secrets)
+if "OPENROUTER_API_KEY" in st.secrets:
+    api_key = st.secrets["OPENROUTER_API_KEY"]
+else:
+    api_key = os.getenv("OPENROUTER_API_KEY")
+
+if not api_key:
+    st.error("❌ Missing OpenRouter API Key in Secrets!")
+    st.stop()
+
+# 2. Initialize Client (Direct to OpenRouter)
+client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=api_key,
+)
+
+# 3. Chat State
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display chat messages from history on app rerun
+# Display History
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-# React to user input
-prompt = st.chat_input("Ask the vault…")
+# 4. Input & Response
+prompt = st.chat_input("Test the model latency...")
 if prompt:
-    # 1. Display user message immediately
+    # User Message
     st.chat_message("user").markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
 
-    # 2. Retrieve Credential
-    # Checks Streamlit secrets first, then Environment variable, then falls back to default
-    if "VAULT_KEY" in st.secrets:
-        VAULT_KEY = st.secrets["VAULT_KEY"]
-    else:
-        VAULT_KEY = os.getenv("VAULT_KEY", "sovereign-123456")
-
-    # 3. Define API Endpoint
-    # CRITICAL FIX: Changed http:// to https://
-    # This prevents the 301 Redirect which was converting your POST request into a GET request
-    url = "https://my-vault-model.fly.dev/v1/chat/completions"
-
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {VAULT_KEY}"
-    }
-
-    payload = {
-        "messages": st.session_state.messages,
-        "temperature": 0.7,
-        "max_tokens": 500
-    }
-
-    # 4. Get response
+    # Assistant Response
     with st.chat_message("assistant"):
         placeholder = st.empty()
-        resp = None  # ensure defined for exception handlers
+        full_response = ""
+        
         try:
-            with st.spinner("The Vault is thinking..."):
-                # Increased timeout to 60s in case the Fly machine is "waking up"
-                resp = requests.post(url, headers=headers, json=payload, timeout=60)
+            stream = client.chat.completions.create(
+                model=MODEL_ID,
+                messages=st.session_state.messages,
+                stream=True,
+                extra_headers={
+                    "HTTP-Referer": "https://my-vault-model.fly.dev", # Optional: Your site
+                    "X-Title": "Vault Verification",
+                }
+            )
             
-            # This will trigger an error if the status code is 4xx or 5xx
-            resp.raise_for_status()
+            for chunk in stream:
+                if chunk.choices[0].delta.content:
+                    content = chunk.choices[0].delta.content
+                    full_response += content
+                    placeholder.markdown(full_response + "▌")
             
-            data = resp.json()
-            reply = data["choices"][0]["message"]["content"]
+            placeholder.markdown(full_response)
+            st.session_state.messages.append({"role": "assistant", "content": full_response})
             
-            placeholder.markdown(reply)
-            st.session_state.messages.append({"role": "assistant", "content": reply})
-            
-        except requests.exceptions.HTTPError as http_err:
-            # If auth fails (401) or URL is wrong (404), this will catch it
-            body = resp.text if resp is not None else "No response body"
-            placeholder.error(f"HTTP Error: {http_err} - Response: {body}")
         except Exception as e:
-            # Error handling
-            placeholder.error(f"Vault error: {e}")
-            
-            # CRITICAL FIX: Remove the user's last message if the request failed
-            # This prevents the "User -> User" history corruption
-            if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
-                st.session_state.messages.pop()
+            st.error(f"API Error: {e}")
